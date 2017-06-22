@@ -1,0 +1,60 @@
+Answer sheet Heri Sulistiyanto
+
+1. Relative Layout
+2. Manifest.xml (bisa juga ditulis di dalam code untuk case tertentu, sebagai contoh adalah runtime permission)
+3. A.onCreate() - A.onStart() - A.onResume() - A.onPause() - B.onCreate() - B.onStart() - B.onResume() - A.onStop()
+4. - startActivity(new Intent(context, target.class));
+   - startActivityForResult(new Intent(context, target.class), requestCode);
+   - startActivities(new Intent[] {intentA, intentB});
+   - bisa menggunakan DeepLink + TaskStackBuilder
+5. onDestroy() tidak memanggil onPause(), akan tetapi jika melakukan force close (melewati proses minimize, maka akan sempat menampilkan "In Background");
+6. uses-permission harusnya di luar dari tag application
+7. method checker Anagram :
+        //TRUE jika anagram & FALSE jika bukan (let's assume firstWord & secondWord tidak null)
+        private boolean checkWords(String firstWord, String secondWord) {
+            if (firstWord.length() <= 0 || secondWord.length() <= 0) {
+                return false;
+            }
+            if (firstWord.length() != secondWord.length()) {
+                return false;
+            }
+            char[] targetOne = firstWord.toLowerCase().toCharArray();
+            char[] targetTwo = secondWord.toLowerCase().toCharArray();
+
+            Map<Character, Integer> mapWord = new HashMap<>();
+            for (char c : targetOne) {
+                int count = 1;
+                if (mapWord.containsKey(c)) {
+                    count = mapWord.get(c) + 1;
+                }
+                mapWord.put(c, count);
+            }
+
+            for (char c : targetTwo) {
+                int count = -1;
+                if (mapWord.containsKey(c)) {
+                    count = mapWord.get(c) - 1;
+                }
+                mapWord.put(c, count);
+            }
+
+            for (char c : mapWord.keySet()) {
+                if (mapWord.get(c) != 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+8. method menghilangkan karakter ganda :
+        private String shortingWords(String longWords) {
+            StringBuffer result = new StringBuffer();
+            for (int i = 0; i < longWords.length(); i++) {
+                while (i + 1 < longWords.length() && longWords.charAt(i) == longWords.charAt(i + 1)) {
+                    i++;
+                }
+                result.append(longWords.charAt(i));
+            }
+            return result.toString();
+        }
+9.

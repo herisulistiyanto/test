@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.andro.indieschool.myfunapp.login.LoginViewModel" />
+
+        <variable
+            name="handler"
+            type="com.andro.indieschool.myfunapp.login.LoginHandler" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp">
+
+        <TextView
+            android:id="@+id/text_label_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="username"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/input_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1"
+            android:maxLength="20"
+            android:layout_below="@+id/text_label_username"
+            android:text="@={viewModel.userName}"/>
+
+        <TextView
+            android:id="@+id/text_label_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/input_username"
+            android:text="password"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/input_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:maxLength="20"
+            android:inputType="textPassword"
+            android:layout_below="@+id/text_label_password"
+            android:text="@={viewModel.password}"/>
+
+        <Button
+            android:id="@+id/button_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/input_password"
+            android:enabled="@{viewModel.buttonLoginEnabled}"
+            android:onClick="@{() -> handler.onClickLogin()}"
+            android:text="LOGIN"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+</layout>
